@@ -57,7 +57,7 @@ The server will run on http://localhost:3000 by default.
 
 Start the Client
 ```bash
-cd client
+cd superhero-client
 npm run dev
 ```
 The client will be available on http://localhost:5173 by default.
