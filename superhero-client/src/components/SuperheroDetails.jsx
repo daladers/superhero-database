@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import {
   Box,
   Typography,
@@ -10,6 +9,7 @@ import {
   Grid2,
   Alert,
 } from "@mui/material";
+import { getSuperhero, deleteSuperhero } from "../api/superheroApi";
 
 const SuperheroDetails = ({ superheroId, onBack, onEdit }) => {
   const [superhero, setSuperhero] = useState(null);
@@ -19,8 +19,7 @@ const SuperheroDetails = ({ superheroId, onBack, onEdit }) => {
   useEffect(() => {
     setLoading(true);
     setError(null);
-    axios
-      .get(`/superheroes/${superheroId}`)
+    getSuperhero(superheroId)
       .then((response) => setSuperhero(response.data))
       .catch((error) => {
         console.error("Error fetching superhero details:", error);
@@ -33,8 +32,7 @@ const SuperheroDetails = ({ superheroId, onBack, onEdit }) => {
 
   const handleDelete = () => {
     if (window.confirm("Are you sure you want to delete this superhero?")) {
-      axios
-        .delete(`/superheroes/${superheroId}`)
+      deleteSuperhero(superheroId)
         .then(() => {
           alert("Superhero deleted successfully");
           onBack(); // Navigate back to the superhero list
